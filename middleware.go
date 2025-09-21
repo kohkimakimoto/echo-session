@@ -106,6 +106,8 @@ func Get(c echo.Context) (*Session, error) {
 }
 
 // MustGet retrieves the session from the echo.Context and panics if it fails.
+// If your handlers run after the session middleware, the session should always be available.
+// This function is provided as a convenience to avoid error handling in such cases.
 func MustGet(c echo.Context) *Session {
 	sess, err := Get(c)
 	if err != nil {
