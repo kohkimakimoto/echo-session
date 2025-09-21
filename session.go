@@ -22,6 +22,42 @@ func (s *Session) Get(key string) any {
 	return s.session.Values[key]
 }
 
+func (s *Session) GetString(key string) string {
+	if v, ok := s.session.Values[key]; ok {
+		if str, ok := v.(string); ok {
+			return str
+		}
+	}
+	return ""
+}
+
+func (s *Session) GetInt(key string) int {
+	if v, ok := s.session.Values[key]; ok {
+		if i, ok := v.(int); ok {
+			return i
+		}
+	}
+	return 0
+}
+
+func (s *Session) GetInt64(key string) int64 {
+	if v, ok := s.session.Values[key]; ok {
+		if i, ok := v.(int64); ok {
+			return i
+		}
+	}
+	return 0
+}
+
+func (s *Session) GetBool(key string) bool {
+	if v, ok := s.session.Values[key]; ok {
+		if b, ok := v.(bool); ok {
+			return b
+		}
+	}
+	return false
+}
+
 func (s *Session) Values() map[any]any {
 	return s.session.Values
 }
