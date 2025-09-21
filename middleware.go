@@ -11,23 +11,6 @@ import (
 
 const contextKey = "_session"
 
-// InvalidSessionError is an error type for invalid session errors.
-type InvalidSessionError struct {
-	err error
-}
-
-func NewInvalidSessionError(err error) *InvalidSessionError {
-	return &InvalidSessionError{err: err}
-}
-
-func (e *InvalidSessionError) Error() string {
-	return fmt.Sprintf("detected invalid session: %v", e.err)
-}
-
-func (e *InvalidSessionError) Unwrap() error {
-	return e.err
-}
-
 type InvalidSessionErrorHandlerFunc func(err error, store gorillasessions.Store, name string, c echo.Context) error
 
 func DefaultInvalidSessionErrorHandler(err error, store gorillasessions.Store, name string, c echo.Context) error {
@@ -38,7 +21,7 @@ func DefaultInvalidSessionErrorHandler(err error, store gorillasessions.Store, n
 		MaxAge: -1,
 	})
 
-	return NewInvalidSessionError(err)
+	return echo.NewHTTPError(http.StatusBadRequest, fmt.Sprintf("invalid session: %v", err))
 }
 
 func Middleware(store gorillasessions.Store) echo.MiddlewareFunc {
