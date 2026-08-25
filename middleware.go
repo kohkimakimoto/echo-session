@@ -5,15 +5,15 @@ import (
 	"net/http"
 
 	gorillasessions "github.com/gorilla/sessions"
-	"github.com/labstack/echo/v4"
-	"github.com/labstack/echo/v4/middleware"
+	"github.com/labstack/echo/v5"
+	"github.com/labstack/echo/v5/middleware"
 )
 
 const contextKey = "_session"
 
-type InvalidSessionErrorHandlerFunc func(err error, store gorillasessions.Store, name string, c echo.Context) error
+type InvalidSessionErrorHandlerFunc func(err error, store gorillasessions.Store, name string, c *echo.Context) error
 
-func DefaultInvalidSessionErrorHandler(err error, store gorillasessions.Store, name string, c echo.Context) error {
+func DefaultInvalidSessionErrorHandler(err error, store gorillasessions.Store, name string, c *echo.Context) error {
 	// Remove the invalid session cookie
 	http.SetCookie(c.Response(), &http.Cookie{
 		Name:   name,
@@ -55,7 +55,7 @@ func MiddlewareWithConfig(config MiddlewareConfig) echo.MiddlewareFunc {
 	}
 
 	return func(next echo.HandlerFunc) echo.HandlerFunc {
-		return func(c echo.Context) error {
+		return func(c *echo.Context) error {
 			if config.Skipper(c) {
 				return next(c)
 			}
@@ -80,7 +80,7 @@ func MiddlewareWithConfig(config MiddlewareConfig) echo.MiddlewareFunc {
 var ErrNoSession = fmt.Errorf("no session in context")
 
 // Get retrieves the session from the echo.Context.
-func Get(c echo.Context) (*Session, error) {
+func Get(c *echo.Context) (*Session, error) {
 	sess, ok := c.Get(contextKey).(*Session)
 	if !ok {
 		return nil, ErrNoSession
@@ -91,7 +91,7 @@ func Get(c echo.Context) (*Session, error) {
 // MustGet retrieves the session from the echo.Context and panics if it fails.
 // If your handlers run after the session middleware, the session should always be available.
 // This function is provided as a convenience to avoid error handling in such cases.
-func MustGet(c echo.Context) *Session {
+func MustGet(c *echo.Context) *Session {
 	sess, err := Get(c)
 	if err != nil {
 		panic(err)

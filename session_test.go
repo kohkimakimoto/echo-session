@@ -5,7 +5,7 @@ import (
 	"net/http/httptest"
 	"testing"
 
-	"github.com/labstack/echo/v4"
+	"github.com/labstack/echo/v5"
 	"github.com/stretchr/testify/assert"
 )
 
@@ -17,7 +17,7 @@ func TestMustGet(t *testing.T) {
 
 	h := MiddlewareWithConfig(MiddlewareConfig{
 		Store: NewCookieStore([]byte("12345678901234567890123456789012")),
-	})(func(c echo.Context) error {
+	})(func(c *echo.Context) error {
 		s := MustGet(c)
 		assert.NotNil(t, s)
 		return c.String(http.StatusOK, "test")
@@ -34,7 +34,7 @@ func TestSession_Save(t *testing.T) {
 
 	h := MiddlewareWithConfig(MiddlewareConfig{
 		Store: NewCookieStore([]byte("12345678901234567890123456789012")),
-	})(func(c echo.Context) error {
+	})(func(c *echo.Context) error {
 		s := MustGet(c)
 		assert.NotNil(t, s)
 

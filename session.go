@@ -2,12 +2,12 @@ package session
 
 import (
 	gorillasessions "github.com/gorilla/sessions"
-	"github.com/labstack/echo/v4"
+	"github.com/labstack/echo/v5"
 )
 
 type Session struct {
 	session     *gorillasessions.Session
-	echoContext echo.Context
+	echoContext *echo.Context
 }
 
 func (s *Session) Internal() *gorillasessions.Session {
