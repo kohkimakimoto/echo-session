@@ -1,4 +1,4 @@
-module github.com/kohkimakimoto/echo-session
+module github.com/kohkimakimoto/echo-session/v4
 
 go 1.23.0
 

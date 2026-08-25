@@ -2,7 +2,7 @@
 
 [![test](https://github.com/kohkimakimoto/echo-session/actions/workflows/test.yml/badge.svg)](https://github.com/kohkimakimoto/echo-session/actions/workflows/test.yml)
 [![MIT License](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/kohkimakimoto/echo-session/blob/master/LICENSE)
-[![Go Reference](https://pkg.go.dev/badge/github.com/kohkimakimoto/echo-session.svg)](https://pkg.go.dev/github.com/kohkimakimoto/echo-session)
+[![Go Reference](https://pkg.go.dev/badge/github.com/kohkimakimoto/echo-session/v4.svg)](https://pkg.go.dev/github.com/kohkimakimoto/echo-session/v4)
 
 
 This is session middleware for [Echo](https://github.com/labstack/echo), provided as an alternative implementation inspired by [labstack/echo-contrib/session](https://github.com/labstack/echo-contrib/tree/master/session).
@@ -16,7 +16,7 @@ import (
 	"fmt"
 	"net/http"
 
-	session "github.com/kohkimakimoto/echo-session"
+	session "github.com/kohkimakimoto/echo-session/v4"
 	"github.com/labstack/echo/v4"
 )
 

@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"net/http"
 
-	session "github.com/kohkimakimoto/echo-session"
+	session "github.com/kohkimakimoto/echo-session/v4"
 	"github.com/labstack/echo/v4"
 )
 

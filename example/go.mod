@@ -3,7 +3,7 @@ module github.com/kohkimakimoto/echo-session/example
 go 1.23.0
 
 require (
-	github.com/kohkimakimoto/echo-session v0.0.0-00010101000000-000000000000
+	github.com/kohkimakimoto/echo-session/v4 v4.0.0-00010101000000-000000000000
 	github.com/labstack/echo/v4 v4.13.4
 )
 
@@ -22,4 +22,4 @@ require (
 	golang.org/x/time v0.11.0 // indirect
 )
 
-replace github.com/kohkimakimoto/echo-session => ..
+replace github.com/kohkimakimoto/echo-session/v4 => ..
